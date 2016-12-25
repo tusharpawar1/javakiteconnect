@@ -2,6 +2,8 @@ import com.neovisionaries.ws.client.WebSocketException;
 import com.rainmatter.kitehttp.SessionExpiryHook;
 import com.rainmatter.kitehttp.exceptions.KiteException;
 import com.rainmatter.models.*;
+
+import org.apache.http.HttpHost;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.rainmatter.kiteconnect.KiteConnect;
@@ -33,7 +35,7 @@ public class Test {
                 kiteconnect.setUserId("xxxxxx");
 
                 //set proxy is optional, if you want to set proxy.
-                kiteconnect.setProxy(new HttpHost("host_name"))
+                kiteconnect.setProxy(new HttpHost("host_name"));
 
                 // Get login url
                 String url = kiteconnect.getLoginUrl();

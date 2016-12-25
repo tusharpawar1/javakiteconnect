@@ -131,7 +131,7 @@ public class Examples {
     }
 
      /** Get order details*/
-    public void getOrder(Kiteconnect kiteconnect) throws KiteException {
+    public void getOrder(KiteConnect kiteconnect) throws KiteException {
         Order order = kiteconnect.getOrder("161028000217306");
         for(int i = 0; i< order.orders.size(); i++){
             System.out.println(order.orders.get(i).orderId+" "+order.orders.get(i).status);
@@ -174,7 +174,7 @@ public class Examples {
     }
 
     /** Modify second leg SL-M order of bracket order*/
-    public void modifySecondLegBoSLM(Kiteconnect kiteconnect) throws KiteException {
+    public void modifySecondLegBoSLM(KiteConnect kiteconnect) throws KiteException {
         Map<String, Object> params = new HashMap<String, Object>(){
             {
                 put("order_id", "161220000183239");
@@ -195,7 +195,7 @@ public class Examples {
     }
 
     /** Modify second leg LIMIT order of bracket order*/
-    public void modifySecondLegBoLIMIT(Kiteconnect kiteconnect) throws KiteException {
+    public void modifySecondLegBoLIMIT(KiteConnect kiteconnect) throws KiteException {
         Map<String, Object> params = new HashMap<String, Object>(){
             {
                 put("order_id", "161220000183238");
@@ -223,7 +223,7 @@ public class Examples {
         System.out.println(order2.orderId);
     }
 
-    public void exitBracketOrder(Kiteconnect kiteconnect) throws KiteException {
+    public void exitBracketOrder(KiteConnect kiteconnect) throws KiteException {
         Map<String, Object> params = new HashMap<>();
         params.put("parent_order_id", "161129000165203");
         Order order = kiteconnect.cancelOrder(params, "161129000221590", "bo");
@@ -234,7 +234,7 @@ public class Examples {
     public void getPositions(KiteConnect kiteconnect) throws KiteException {
         // Get positions returns position model which contains list of positions.
         Position position = kiteconnect.getPositions();
-        System.out.println(position.positions.size());
+        System.out.println(position.dayPositions.size());
     }
 
     /** Get holdings.*/
@@ -284,7 +284,7 @@ public class Examples {
     }
 
     /** Get quote for a scrip.*/
-    public void getQuoteIndices(Kiteconnect kiteconnect) throws KiteException {
+    public void getQuoteIndices(KiteConnect kiteconnect) throws KiteException {
         // Get quotes returns quote for desired tradingsymbol.
         Quote quote = kiteconnect.getQuoteIndices("NSE", "NIFTY 50");
         System.out.println(quote.lastPrice);
@@ -316,9 +316,9 @@ public class Examples {
     /** Demonstrates ticker connection, subcribing for instruments, unsubscribing for instruments, set mode of tick data, ticker disconnection*/
     public void tickerUsage(KiteConnect kiteconnect) throws IOException, WebSocketException {
         /** To get live price use com.rainmatter.ticker websocket connection. It is recommended to use only one websocket connection at any point of time and make sure you stop connection, once user goes out of app.*/
-        ArrayList tokens = new ArrayList<>();
+        final ArrayList tokens = new ArrayList<>();
         tokens.add(53287175);
-        KiteTicker tickerProvider = new KiteTicker(kiteconnect);
+        final KiteTicker tickerProvider = new KiteTicker(kiteconnect);
         tickerProvider.setOnConnectedListener(new OnConnect() {
             @Override
             public void onConnected() {

@@ -9,3 +9,5 @@ sample/out/*
 out/*
 !sample/.idea/
 sample/.idea/*
+/bin/
+/target/
